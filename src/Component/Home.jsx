@@ -1,7 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-// import Images from "../Component/Icon1.png"
-// import Imag  from "../Component/Icon2.svg"
 
 const Home = () => {
   const [city, setCity] = useState({
@@ -35,21 +33,23 @@ const Home = () => {
         `http://api.openweathermap.org/data/2.5/weather?q=${city.country}&appid=896cc9fe1e3155ff029cdf9f42b2f15a&units=metric`
       )
         .then((res) => res.json())
-        .then((apiData) => apiData);
+        .then((data) => setWeather(data.main.temp));
 
-      const newApi = await fetch(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${apiData.coord.lat}&lon=${apiData.coord.lon}&appid=6e0f95cbb6ce20c0f753187b40c3f42a&units=metric`
-      )
-        .then((resapi) => resapi.json())
-        .then((newApi) => newApi);
 
-      setWeather(newApi.current.temp);
-      setfirstWeather(newApi.daily[0].temp.day);
-      setSecondWeather(newApi.daily[1].temp.day);
-      setThirdWeather(newApi.daily[2].temp.day);
-      setFourthWeather(newApi.daily[3].temp.day);
-      setFifthWeather(newApi.daily[4].temp.day);
-      setSixthWeather(newApi.daily[5].temp.day);
+      // const newApi = await fetch(
+      //   `https://api.openweathermap.org/data/2.5/onecall?lat=${apiData.coord.lat}&lon=${apiData.coord.lon}&appid=6e0f95cbb6ce20c0f753187b40c3f42a&units=metric`
+      // )
+      //   .then((resapi) => resapi.json())
+      //   .then((newApi) => newApi);
+
+
+      // setWeather(newApi.main.temp);
+    //   setfirstWeather(newApi.daily[0].temp.day);
+    //   setSecondWeather(newApi.daily[1].temp.day);
+    //   setThirdWeather(newApi.daily[2].temp.day);
+    //   setFourthWeather(newApi.daily[3].temp.day);
+    //   setFifthWeather(newApi.daily[4].temp.day);
+    //   setSixthWeather(newApi.daily[5].temp.day);
     }
   }
 
