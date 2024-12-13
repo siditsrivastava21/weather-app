@@ -1,19 +1,20 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import axios from 'axios'
 
 const Home = () => {
   const [city, setCity] = useState({
     country: "",
   });
 
-  const [weather, setWeather] = useState(["0"]);
+  const [weather, setWeather] = useState(0);
   const [firstweather, setfirstWeather] = useState(["0"]);
   const [secondweather, setSecondWeather] = useState(["0"]);
   const [thirdweather, setThirdWeather] = useState(["0"]);
   const [fourthweather, setFourthWeather] = useState(["0"]);
   const [fifthweather, setFifthWeather] = useState(["0"]);
   const [sixthweather, setSixthWeather] = useState(["0"]);
-  //   const [weatherimg, setWeatherimg] = useState([]);
+    const [weatherimg, setWeatherimg] = useState([]);
 
   const handlerChanger = (e) => {
     let name = e.target.name;
@@ -26,31 +27,36 @@ const Home = () => {
   async function weatherData(e) {
     e.preventDefault();
 
-    if (city.country == "") {
-      alert("Please Enter Your City");
-    } else {
-      const apiData = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city.country}&appid=896cc9fe1e3155ff029cdf9f42b2f15a&units=metric`
-      )
-        .then((res) => res.json())
-        .then((data) => setWeather(data.main.temp));
+    // if (city.country == "") {
+    //   alert("Please Enter Your City");
+    // } else {
 
+    // axios.get(`https://api.weatherstack.com/current?access_key=dba3699dd11775c6e05128f502066d1f&query=${city.country}`)
+    // .then((res) => {
+    //   const data = res.data;
+    //   setWeather(data.main.temp)
+    //   console.log(data.main.temp)
+    // })
+    await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city.country}&appid=896cc9fe1e3155ff029cdf9f42b2f15a&units=metric`
+    )
+      .then((res) => res.json())
+      .then((data) => setWeather(data.main.temp));
 
-      // const newApi = await fetch(
-      //   `https://api.openweathermap.org/data/2.5/onecall?lat=${apiData.coord.lat}&lon=${apiData.coord.lon}&appid=6e0f95cbb6ce20c0f753187b40c3f42a&units=metric`
-      // )
-      //   .then((resapi) => resapi.json())
-      //   .then((newApi) => newApi);
+    // const newApi = await fetch(
+    //   `https://api.openweathermap.org/data/2.5/onecall?lat=${apiData.coord.lat}&lon=${apiData.coord.lon}&appid=6e0f95cbb6ce20c0f753187b40c3f42a&units=metric`
+    // )
+    //   .then((resapi) => resapi.json())
+    //   .then((newApi) => newApi);
 
-
-      // setWeather(newApi.main.temp);
+    // setWeather(newApi.main.temp);
     //   setfirstWeather(newApi.daily[0].temp.day);
     //   setSecondWeather(newApi.daily[1].temp.day);
     //   setThirdWeather(newApi.daily[2].temp.day);
     //   setFourthWeather(newApi.daily[3].temp.day);
     //   setFifthWeather(newApi.daily[4].temp.day);
     //   setSixthWeather(newApi.daily[5].temp.day);
-    }
+    // }
   }
 
   const month = [
@@ -151,7 +157,6 @@ const Home = () => {
                   <span>
                     <p>
                       <sup>o</sup>c
-                      {/* <img src={Images} alt="Img1" style={{ width:"60px", marginLeft:"40px"}} /> */}
                     </p>
                   </span>
                 </div>
@@ -166,7 +171,7 @@ const Home = () => {
               {week.map((week) => (
                 <div className="tues-weather pt-3 " key={week.id}>
                   <h6>{week.days}</h6>
-                  {/* <img src={Imag} alt="img" /> */}
+
                   <h4>
                     {week.newWeather}
                     <sup>o</sup>c
